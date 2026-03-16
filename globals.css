@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Base ──────────────────────────────────────────────────────────────── */
+:root {
+  color-scheme: dark;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  height: 100%;
+  overscroll-behavior: none;
+}
+
+body {
+  background: #080810;
+  color: #d4d4f0;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: #1e1e30;
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover { background: #3a3a55; }
+
+/* ── Selection ─────────────────────────────────────────────────────────── */
+::selection {
+  background: rgba(124, 92, 252, 0.35);
+  color: #fff;
+}
+
+/* ── Chat scrollback ───────────────────────────────────────────────────── */
+.chat-scroll {
+  scroll-behavior: smooth;
+}
+.chat-scroll::-webkit-scrollbar { width: 3px; }
+
+/* ── Bubble swipe timestamp ────────────────────────────────────────────── */
+.bubble-wrap {
+  touch-action: pan-y;
+  transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.bubble-wrap.swiped { transform: translateX(-64px); }
+
+/* ── Noise overlay ─────────────────────────────────────────────────────── */
+.noise-overlay {
+  position: relative;
+}
+.noise-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* ── Glass panel ───────────────────────────────────────────────────────── */
+.glass {
+  background: rgba(15, 15, 26, 0.8);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(124, 92, 252, 0.1);
+}
+
+/* ── Gradient border trick ─────────────────────────────────────────────── */
+.gradient-border {
+  position: relative;
+}
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(124,92,252,0.5), rgba(45,212,191,0.3));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* ── Input reset ───────────────────────────────────────────────────────── */
+textarea:focus { outline: none; }
+input:focus { outline: none; }
+
+/* ── Sidebar active ────────────────────────────────────────────────────── */
+.nav-item-active {
+  background: linear-gradient(90deg, rgba(124,92,252,0.15) 0%, transparent 100%);
+  border-left: 2px solid #7c5cfc;
+}
